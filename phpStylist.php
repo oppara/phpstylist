@@ -13,6 +13,23 @@
  * @date:    2007-07-07
  *
  *****************************************************************************/
+if (!defined('PHP_VERSION_ID')) {
+    $version = explode('.', PHP_VERSION);
+    define('PHP_VERSION_ID', ($version[0] * 10000 + $version[1] * 100 + $version[2]));
+}
+
+if ( PHP_VERSION_ID < 50000) {
+    define('T_INTERFACE', 'T_INTERFACE');
+    define('T_INSTANCEOF', 'T_INSTANCEOF');
+    define('T_FINAL', 'T_FINAL');
+    define('T_ABSTRACT', 'T_ABSTRACT');
+    define('T_PUBLIC', 'T_PUBLIC');
+    define('T_PROTECTED', 'T_PROTECTED');
+    define('T_PRIVATE', 'T_PRIVATE');
+    define('T_IMPLEMENTS', 'T_IMPLEMENTS');
+    define('T_CLONE', 'T_CLONE');
+}
+
 if (isDownload()) {
   downloadFile();
 } elseif(isCommandLine()) {
