@@ -17,7 +17,7 @@ function phpStylist() {
 	php_path     = "C:\\Program Files\\xampp\\php\\php.exe";
 	stylist_path = "C:\\Program Files\\xampp\\htdocs\\phpStylist.php";
 	params = "";
-	
+
   //Indentation and General Formatting:
 	params += "--indent_size 2 ";
 	//params += "--indent_with_tabs ";
@@ -25,7 +25,7 @@ function phpStylist() {
 	//params += "--space_inside_parentheses ";
 	//params += "--space_outside_parentheses ";
 	params += "--space_after_comma ";
-	
+
   //Operators:
 	params += "--space_around_assignment ";
 	params += "--align_var_assignment ";
@@ -33,14 +33,14 @@ function phpStylist() {
 	params += "--space_around_arithmetic ";
 	params += "--space_around_logical ";
 	params += "--space_around_colon_question ";
-	
+
   //Functions, Classes and Objects:
 	params += "--line_before_function ";
 	params += "--line_before_curly_function ";
 	//params += "--line_after_curly_function ";
 	//params += "--space_around_obj_operator ";
 	//params += "--space_around_double_colon ";
-	
+
   //Control Structures:
 	params += "--space_after_if ";
 	//params += "--else_along_curly ";
@@ -49,7 +49,7 @@ function phpStylist() {
 	params += "--line_after_break ";
 	params += "--space_inside_for ";
 	params += "--indent_case ";
-	
+
 	//Arrays and Concatenation:
 	//params += "--line_before_array ";
 	params += "--vertical_array ";
@@ -57,7 +57,7 @@ function phpStylist() {
 	params += "--space_around_double_arrow ";
 	//params += "--vertical_concat ";
 	//params += "--space_around_concat ";
-	
+
 	//Comments:
 	params += "--line_before_comment_multi ";
 	//params += "--line_after_comment_multi ";

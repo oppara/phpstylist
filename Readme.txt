@@ -94,7 +94,7 @@ C:\Program Files\PSPad\Script\JScript.
 Open the phpStylist.js file and edit the first two variables:
 	php_path     = "C:\\Program Files\\xampp\\php\\php.exe";
 	stylist_path = "C:\\Program Files\\xampp\\htdocs\\phpStylist.php";
-	
+
 Replace the paths with the appropriate for your system. Don't forget to double
 backslashes.
 
