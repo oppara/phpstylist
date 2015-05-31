@@ -67,6 +67,43 @@ if (PHP_VERSION_ID < _PHP50) {
     define('T_CATCH', 'T_CATCH');
 }
 
+define('S_OPEN_CURLY', '{');
+define('S_CLOSE_CURLY', '}');
+define('S_OPEN_BRACKET', '[');
+define('S_CLOSE_BRACKET', ']');
+define('S_OPEN_PARENTH', '(');
+define('S_CLOSE_PARENTH', ')');
+define('S_SEMI_COLON', ';');
+define('S_COMMA', ',');
+define('S_CONCAT', '.');
+define('S_COLON', ':');
+define('S_QUESTION', '?');
+define('S_EQUAL', '=');
+define('S_EXCLAMATION', '!');
+define('S_IS_GREATER', '>');
+define('S_IS_SMALLER', '<');
+define('S_MINUS', '-');
+define('S_PLUS', '+');
+define('S_TIMES', '*');
+define('S_DIVIDE', '/');
+define('S_MODULUS', '%');
+define('S_REFERENCE', '&');
+define('S_QUOTE', '"');
+define('S_AT', '@');
+define('S_DOLLAR', '$');
+define('S_ABSTRACT', 'abstract');
+define('S_INTERFACE', 'interface');
+define('S_FINAL', 'final');
+define('S_PUBLIC', 'public');
+define('S_PRIVATE', 'private');
+define('S_PROTECTED', 'protected');
+if (defined('T_ML_COMMENT')) {
+    define('T_DOC_COMMENT', T_ML_COMMENT);
+}
+elseif (defined('T_DOC_COMMENT')) {
+    define('T_ML_COMMENT', T_DOC_COMMENT);
+}
+
 
 class phpStylist
 {
@@ -117,42 +154,6 @@ class phpStylist
 
   function phpStylist()
   {
-    define("S_OPEN_CURLY", "{");
-    define("S_CLOSE_CURLY", "}");
-    define("S_OPEN_BRACKET", "[");
-    define("S_CLOSE_BRACKET", "]");
-    define("S_OPEN_PARENTH", "(");
-    define("S_CLOSE_PARENTH", ")");
-    define("S_SEMI_COLON", ";");
-    define("S_COMMA", ",");
-    define("S_CONCAT", ".");
-    define("S_COLON", ":");
-    define("S_QUESTION", "?");
-    define("S_EQUAL", "=");
-    define("S_EXCLAMATION", "!");
-    define("S_IS_GREATER", ">");
-    define("S_IS_SMALLER", "<");
-    define("S_MINUS", "-");
-    define("S_PLUS", "+");
-    define("S_TIMES", "*");
-    define("S_DIVIDE", "/");
-    define("S_MODULUS", "%");
-    define("S_REFERENCE", "&");
-    define("S_QUOTE", '"');
-    define("S_AT", "@");
-    define("S_DOLLAR", "$");
-    define("S_ABSTRACT", "abstract");
-    define("S_INTERFACE", "interface");
-    define("S_FINAL", "final");
-    define("S_PUBLIC", "public");
-    define("S_PRIVATE", "private");
-    define("S_PROTECTED", "protected");
-    if (defined("T_ML_COMMENT")) {
-      define("T_DOC_COMMENT", T_ML_COMMENT);
-    }
-    elseif (defined("T_DOC_COMMENT")) {
-      define("T_ML_COMMENT", T_DOC_COMMENT);
-    }
   }
 
   function formatCode($source = '')
