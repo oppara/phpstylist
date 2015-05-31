@@ -18,7 +18,43 @@ if (!defined('PHP_VERSION_ID')) {
     define('PHP_VERSION_ID', ($version[0] * 10000 + $version[1] * 100 + $version[2]));
 }
 
-if ( PHP_VERSION_ID < 50000) {
+define('_PHP50', 50000);
+define('_PHP51', 50100);
+define('_PHP53', 50300);
+define('_PHP54', 50400);
+define('_PHP55', 50500);
+define('_PHP56', 50600);
+define('_PHP70', 70000);
+
+if (PHP_VERSION_ID < _PHP70) {
+    define('T_SPACESHIP', 'T_SPACESHIP');
+}
+if (PHP_VERSION_ID < _PHP56) {
+    define('T_POW', 'T_POW');
+    define('T_POW_EQUAL', 'T_POW_EQUAL');
+    define('T_ELLIPSIS', 'T_ELLIPSIS');
+}
+if (PHP_VERSION_ID < _PHP55) {
+    define('T_FINALLY', 'T_FINALLY');
+    define('T_YIELD', 'T_YIELD');
+}
+if (PHP_VERSION_ID < _PHP54) {
+    define('T_TRAIT', 'T_TRAIT');
+    define('T_INSTEADOF', 'T_INSTEADOF');
+    define('T_TRAIT_C', 'T_TRAIT_C');
+}
+if (PHP_VERSION_ID < _PHP53) {
+    define('T_USE', 'T_USE');
+    define('T_NS_SEPARATOR', 'T_NS_SEPARATOR');
+    define('T_DIR', 'T_DIR');
+    define('T_GOTO', 'T_GOTO');
+    define('T_NAMESPACE', 'T_NAMESPACE');
+    define('T_NS_C', 'T_NS_C');
+}
+if (PHP_VERSION_ID < _PHP51) {
+    define('T_HALT_COMPILER', 'T_HALT_COMPILER');
+}
+if (PHP_VERSION_ID < _PHP50) {
     define('T_INTERFACE', 'T_INTERFACE');
     define('T_INSTANCEOF', 'T_INSTANCEOF');
     define('T_FINAL', 'T_FINAL');
@@ -28,6 +64,7 @@ if ( PHP_VERSION_ID < 50000) {
     define('T_PRIVATE', 'T_PRIVATE');
     define('T_IMPLEMENTS', 'T_IMPLEMENTS');
     define('T_CLONE', 'T_CLONE');
+    define('T_CATCH', 'T_CATCH');
 }
 
 
