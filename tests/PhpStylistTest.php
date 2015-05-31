@@ -53,21 +53,43 @@ class PhpStylistTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @group array
      */
     public function handleArray()
     {
         $str = <<<'EOF'
 <?php
-$a = array('foo' => 'foo', 'barbar' => 'baz');
+$a = array('foo' => 'bar', 'barbar' => 'baz');
 EOF;
-        // $a = ['foo' => 'foo', 'bar' => 'barbar', 'baz' => 'bazbazbaz'];
 
         $expected = <<<'EOF'
 <?php
 $a = array(
-    'foo' => 'foo',
+    'foo' => 'bar',
     'barbar' => 'baz',
 );
+EOF;
+
+        $this->checkStyle($str, $expected);
+    }
+
+    /**
+     * @test
+     * @group array
+     */
+    public function handleBracketArray()
+    {
+        $str = <<<'EOF'
+<?php
+$a = ['foo' => 'bar', 'barbar' => 'baz'];
+EOF;
+
+        $expected = <<<'EOF'
+<?php
+$a = [
+    'foo' => 'bar',
+    'barbar' => 'baz',
+];
 EOF;
 
         $this->checkStyle($str, $expected);

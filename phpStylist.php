@@ -274,7 +274,42 @@ class phpStylist
           break;
 
         case S_OPEN_BRACKET:
+            if ($this->_is_token(S_EQUAL, true) && !$this->_is_token(S_CLOSE_BRACKET)) {
+                if ($this->options["VERTICAL_ARRAY"]) {
+                    $next = $this->_is_token(array(T_DOUBLE_ARROW), true);
+                    $next |= $this->_is_token(S_EQUAL, true);
+                    $next |= $array_level>0;
+                    if ($next) {
+                        $array_level++;
+                        $arr_parenth["i" . $array_level] = 0;
+                    }
+                }
+                if ($array_level > 0) {
+                    $arr_parenth["i" . $array_level]++;
+                    if ($this->_is_token(S_EQUAL, true) && !$this->_is_token(S_CLOSE_BRACKET)) {
+                        $this->_set_indent( + 1);
+                        $this->_append_code(' ' . (!$this->options["LINE_BEFORE_ARRAY"] ? '' : $this->_get_crlf_indent(false, - 1)) . $text . $this->_get_crlf_indent());
+                        break;
+                    }
+                }
+
+                $this->_append_code($text);
+            }
+          break;
+
         case S_CLOSE_BRACKET:
+          if ($array_level > 0) {
+            $arr_parenth["i" . $array_level]--;
+            if ($arr_parenth["i" . $array_level] == 0) {
+              $comma = substr(trim($this->_code), - 1) != "," && $this->options['VERTICAL_ARRAY'] ? "," : "";
+              $this->_set_indent( - 1);
+              $this->_append_code($comma . $this->_get_crlf_indent() . $text . $this->_get_crlf_indent());
+              unset($arr_parenth["i" . $array_level]);
+              $array_level--;
+              break;
+            }
+          }
+
           $this->_append_code($text);
           break;
 
