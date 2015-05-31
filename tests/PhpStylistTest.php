@@ -75,6 +75,33 @@ EOF;
 
     /**
      * @test
+     * @group deep_array
+     */
+    public function handleDeepArray()
+    {
+        $str = <<<'EOF'
+<?php
+$a = array('foo' =>'bar','barbar'=>array('baz'=>array('1', '2')));
+EOF;
+
+        $expected = <<<'EOF'
+<?php
+$a = array(
+    'foo' => 'bar',
+    'barbar' => array(
+        'baz' => array(
+            '1',
+            '2',
+        ),
+    ),
+);
+EOF;
+
+        $this->checkStyle($str, $expected);
+    }
+
+    /**
+     * @test
      * @group array
      */
     public function handleBracketArray()
@@ -89,6 +116,33 @@ EOF;
 $a = [
     'foo' => 'bar',
     'barbar' => 'baz',
+];
+EOF;
+
+        $this->checkStyle($str, $expected);
+    }
+
+    /**
+     * @test
+     * @group deep_array
+     */
+    public function handleDeepBracketArray()
+    {
+        $str = <<<'EOF'
+<?php
+$a=['foo' =>'bar','barbar'=>['baz'=>['1','2']]];
+EOF;
+
+        $expected = <<<'EOF'
+<?php
+$a = [
+    'foo' => 'bar',
+    'barbar' => [
+        'baz' => [
+            '1',
+            '2',
+        ],
+    ],
 ];
 EOF;
 
