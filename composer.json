@@ -1,0 +1,24 @@
+{
+  "name": "oppara/phpstylist",
+  "type": "application",
+  "description": "Format, clean-up, beautify and standardize your php code",
+  "homepage": "http://sourceforge.net/projects/phpstylist/",
+  "license": "RPL",
+  "authors": [
+    {
+      "name": "Mr. Milk (aka Marcelo Leite)",
+      "email": "mrmilk@anysoft.com.br",
+      "role": "Original Developer"
+    },
+    {
+      "name": "oppara",
+      "email": "oppara@oppara.tv"
+    }
+  ],
+  "require": {
+    "php": ">=5.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  }
+}
