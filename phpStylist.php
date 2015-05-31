@@ -661,6 +661,7 @@ class phpStylist
         case T_FUNC_C:
         case T_CLASS_C:
         case T_FILE:
+        case T_DIR:
         case T_LINE:
         case T_USE:
         case T_NAMESPACE:
