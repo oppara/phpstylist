@@ -2,7 +2,8 @@
 class PhpStylistTest extends PHPUnit_Framework_TestCase
 {
     const INDENT_SIZE = 4;
-    const VALID_OPTIONS = [
+
+    protected $valid_options = array(
         'line_before_comment_multi',
         'keep_redundant_lines',
         'space_after_comma',
@@ -24,7 +25,7 @@ class PhpStylistTest extends PHPUnit_Framework_TestCase
         'space_around_concat',
         'vertical_array',
         'align_array_assignment',
-    ];
+    );
 
     /**
      * @var phpStylist
@@ -35,7 +36,7 @@ class PhpStylistTest extends PHPUnit_Framework_TestCase
     {
         $this->ps = new phpStylist();
         $this->ps->indent_size = self::INDENT_SIZE;
-        foreach (self::VALID_OPTIONS as $opt) {
+        foreach ($this->valid_options as $opt) {
             $this->ps->options[strtoupper($opt)] = true;
         }
     }
@@ -106,6 +107,10 @@ EOF;
      */
     public function handleBracketArray()
     {
+        if (PHP_VERSION_ID < _PHP54) {
+            $this->markTestSkipped();
+        }
+
         $str = <<<'EOF'
 <?php
 $a = ['foo' => 'bar', 'barbar' => 'baz'];
@@ -128,6 +133,10 @@ EOF;
      */
     public function handleDeepBracketArray()
     {
+        if (PHP_VERSION_ID < _PHP54) {
+            $this->markTestSkipped();
+        }
+
         $str = <<<'EOF'
 <?php
 $a=['foo' =>'bar','barbar'=>['baz'=>['1','2']]];
