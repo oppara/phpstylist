@@ -194,7 +194,12 @@ class phpStylist
           default:
         }
       }
+
       switch ($id) {
+        case T_NS_SEPARATOR:
+          $this->_append_code($text, false);
+          break;
+
         case S_OPEN_CURLY:
           $condition = $in_function ? $this->options["LINE_BEFORE_CURLY_FUNCTION"] : $this->options["LINE_BEFORE_CURLY"];
           $this->_set_indent( + 1);
@@ -657,6 +662,8 @@ class phpStylist
         case T_CLASS_C:
         case T_FILE:
         case T_LINE:
+        case T_USE:
+        case T_NAMESPACE:
           $this->_append_code($text . $this->_get_space(), false);
           break;
 
