@@ -721,7 +721,7 @@ class phpStylist
     else {
       while (++$i < count($this->_tokens)-1 && is_array($this->_tokens[$i]) && $this->_tokens[$i][0] == T_WHITESPACE);
     }
-    if (is_string($this->_tokens[$i]) && $this->_tokens[$i] == $token) {
+    if (isset($this->_tokens[$i]) && is_string($this->_tokens[$i]) && $this->_tokens[$i] == $token) {
       return $idx ? $i : true;
     }
     elseif (is_array($token) && is_array($this->_tokens[$i])) {
