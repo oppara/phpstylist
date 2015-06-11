@@ -49,6 +49,9 @@ abstract class PhpStylistTestCase extends PHPUnit_Framework_TestCase
             echo $actual;
             echo "\n";
         }
+
+        $actual = preg_replace('/\s+$/m', '', $actual);
+        $expected = preg_replace('/\s+$/m', '', $expected);
         $this->assertEquals(trim($expected), trim($actual));
     }
 

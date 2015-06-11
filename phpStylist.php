@@ -274,9 +274,11 @@ class phpStylist
           break;
 
         case S_OPEN_BRACKET:
-            if (($this->_is_token(S_EQUAL, true) || $this->_is_token(array(T_DOUBLE_ARROW), true)) && !$this->_is_token(S_CLOSE_BRACKET)) {
+            if ($this->_is_bracket_array()) {
                 if ($this->options["VERTICAL_ARRAY"]) {
                     $next = $this->_is_token(array(T_DOUBLE_ARROW), true);
+                    $next |= $this->_is_token(S_OPEN_BRACKET, true);
+                    $next |= $this->_is_token(S_COMMA, true);
                     $next |= $this->_is_token(S_EQUAL, true);
                     $next |= $array_level>0;
                     if ($next) {
@@ -284,9 +286,16 @@ class phpStylist
                         $arr_parenth["i" . $array_level] = 0;
                     }
                 }
+
                 if ($array_level > 0) {
                     $arr_parenth["i" . $array_level]++;
-                    if (($this->_is_token(S_EQUAL, true) || $this->_is_token(array(T_DOUBLE_ARROW), true)) && !$this->_is_token(S_CLOSE_BRACKET)) {
+                    if ($this->_is_bracket_array()) {
+                        if (($this->_is_token(S_OPEN_BRACKET, true) || $this->_is_token(S_COMMA, true)) && $this->options["VERTICAL_ARRAY"]) {
+                            $this->_set_indent( + 1);
+                            $this->_append_code(' ' . $this->_get_crlf_indent(false, -1) . $text . $this->_get_crlf_indent());
+                            break;
+                        }
+
                         $this->_set_indent( + 1);
                         $this->_append_code(' ' . (!$this->options["LINE_BEFORE_ARRAY"] ? '' : $this->_get_crlf_indent(false, - 1)) . $text . $this->_get_crlf_indent());
                         break;
@@ -903,5 +912,15 @@ class phpStylist
     else {
       return $this->_code;
     }
+  }
+
+  function _is_bracket_array()
+  {
+      if (($this->_is_token(S_OPEN_BRACKET, true) || $this->_is_token(S_COMMA, true) || $this->_is_token(S_EQUAL, true) || $this->_is_token(array(T_DOUBLE_ARROW), true))
+          && !$this->_is_token(S_CLOSE_BRACKET)) {
+          return true;
+      }
+
+      return false;
   }
 }

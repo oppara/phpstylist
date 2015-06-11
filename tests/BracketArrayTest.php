@@ -69,5 +69,56 @@ EOF;
         $this->checkStyle($str, $expected);
     }
 
+    /**
+     * @test
+     */
+    public function handleBracketArray03()
+    {
+        $str = <<<'EOF'
+<?php
+$a=[
+    ['foo' => 33, 'bar' => false]
+];
+EOF;
+
+        $expected = <<<'EOF'
+<?php
+$a = [
+    [
+        'foo' => 33,
+        'bar' => false,
+    ],
+];
+EOF;
+
+        $this->checkStyle($str, $expected);
+    }
+
+    /**
+     * @test
+     */
+    public function handleBracketArray04()
+    {
+        $str = <<<'EOF'
+<?php
+$a=[
+    ['foo', ['bar']]
+];
+EOF;
+
+        $expected = <<<'EOF'
+<?php
+$a = [
+    [
+        'foo',
+        [
+            'bar',
+        ],
+    ],
+];
+EOF;
+
+        $this->checkStyle($str, $expected);
+    }
 }
 
