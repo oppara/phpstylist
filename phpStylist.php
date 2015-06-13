@@ -163,6 +163,7 @@ class phpStylist
     $in_break      = false;
     $in_function   = false;
     $in_concat     = false;
+    $in_catch      = false;
     $space_after   = false;
     $curly_open    = false;
     $array_level   = 0;
@@ -340,6 +341,9 @@ class phpStylist
           break;
 
         case S_CLOSE_PARENTH:
+            if ($in_catch) {
+                $in_catch = false;
+            }
           if ($array_level > 0) {
             $arr_parenth["i" . $array_level]--;
             if ($arr_parenth["i" . $array_level] == 0) {
@@ -647,7 +651,6 @@ class phpStylist
         case T_STRING:
         case T_CONSTANT_ENCAPSED_STRING:
         case T_ENCAPSED_AND_WHITESPACE:
-        case T_VARIABLE:
         case T_CHARACTER:
         case T_STRING_VARNAME:
         case S_AT:
@@ -732,6 +735,19 @@ class phpStylist
             $this->_append_code((!$this->options["LINE_BEFORE_CURLY"] || $text == "" ? ' ' : $this->_get_crlf_indent(false, - 1)) . $text . $this->_get_crlf_indent());
             $if_pending++;
           }
+          break;
+
+        case T_CATCH:
+          $in_catch = true;
+          $this->_append_code($text . ' ', false);
+          break;
+
+        case T_VARIABLE:
+            if ($in_catch) {
+                $this->_append_code(' ' .  $text, false);
+            } else {
+                $this->_append_code($text, false);
+            }
           break;
 
         default:
