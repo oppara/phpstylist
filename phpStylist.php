@@ -290,21 +290,21 @@ class phpStylist
 
                 if ($array_level > 0) {
                     $arr_parenth["i" . $array_level]++;
-                    if ($this->_is_bracket_array()) {
-                        if (($this->_is_token(S_OPEN_BRACKET, true) || $this->_is_token(S_COMMA, true)) && $this->options["VERTICAL_ARRAY"]) {
-                            $this->_set_indent( + 1);
-                            $this->_append_code(' ' . $this->_get_crlf_indent(false, -1) . $text . $this->_get_crlf_indent());
-                            break;
-                        }
-
+                    if (($this->_is_token(S_OPEN_BRACKET, true) || $this->_is_token(S_COMMA, true)) && $this->options["VERTICAL_ARRAY"]) {
                         $this->_set_indent( + 1);
-                        $this->_append_code(' ' . (!$this->options["LINE_BEFORE_ARRAY"] ? '' : $this->_get_crlf_indent(false, - 1)) . $text . $this->_get_crlf_indent());
+                        $this->_append_code(' ' . $this->_get_crlf_indent(false, -1) . $text . $this->_get_crlf_indent());
                         break;
                     }
-                }
 
+                    $this->_set_indent( + 1);
+                    $this->_append_code(' ' . (!$this->options["LINE_BEFORE_ARRAY"] ? '' : $this->_get_crlf_indent(false, - 1)) . $text . $this->_get_crlf_indent());
+                    break;
+                }
                 $this->_append_code($text, false);
+                break;
             }
+
+            $this->_append_code($text);
           break;
 
         case S_CLOSE_BRACKET:

@@ -6,6 +6,27 @@ class ArrayTest extends PhpStylistTestCase
 
     /**
      * @test
+     * @group hoi
+     */
+    public function accessArrayElement()
+    {
+        $str = <<<'EOF'
+<?php
+var_dump($a['foo']['bar']['baz']);
+var_dump($b[0][2][1]);
+EOF;
+
+        $expected = <<<'EOF'
+<?php
+var_dump($a['foo']['bar']['baz']);
+var_dump($b[0][2][1]);
+EOF;
+
+        $this->checkStyle($str, $expected);
+    }
+
+    /**
+     * @test
      * @group array
      */
     public function handleArray01()
