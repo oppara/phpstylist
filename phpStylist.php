@@ -143,6 +143,7 @@ class phpStylist
     "ALIGN_ARRAY_ASSIGNMENT"      => false,
     "ALIGN_VAR_ASSIGNMENT"        => false,
     "ELSE_ALONG_CURLY"            => false,
+    "IGNORE_BRACKET_ARRAY"        => false,
   );
   var $_new_line = "\n";
   var $_indent   = 0;
@@ -275,7 +276,7 @@ class phpStylist
 
         case S_OPEN_BRACKET:
             if ($this->_is_bracket_array()) {
-                if ($this->options["VERTICAL_ARRAY"]) {
+                if ($this->options["VERTICAL_ARRAY"] && !$this->options["IGNORE_BRACKET_ARRAY"]) {
                     $next = $this->_is_token(array(T_DOUBLE_ARROW), true);
                     $next |= $this->_is_token(S_OPEN_BRACKET, true);
                     $next |= $this->_is_token(S_COMMA, true);
@@ -302,7 +303,7 @@ class phpStylist
                     }
                 }
 
-                $this->_append_code($text);
+                $this->_append_code($text, false);
             }
           break;
 
@@ -408,7 +409,7 @@ class phpStylist
         case T_SR_EQUAL:
         case S_EQUAL:
           $condition = $this->options["SPACE_AROUND_ASSIGNMENT"];
-          if ($this->_is_token(S_OPEN_PARENTH)) {
+          if ($this->_is_token(S_OPEN_PARENTH) || $this->_is_token(S_OPEN_BRACKET)) {
             $space_after = $condition;
           }
           $this->_append_code($this->_get_space($condition) . $text . $this->_get_space($condition));

@@ -120,5 +120,26 @@ EOF;
 
         $this->checkStyle($str, $expected);
     }
+
+    /**
+     * @test
+     */
+    public function ignoreBracketArray()
+    {
+        $str = <<<'EOF'
+<?php
+$a=[
+    ['foo', ['bar']]
+];
+EOF;
+
+        $expected = <<<'EOF'
+<?php
+$a = [['foo', ['bar']]];
+EOF;
+
+        $this->ps->options['IGNORE_BRACKET_ARRAY'] = true;
+        $this->checkStyle($str, $expected);
+    }
 }
 
