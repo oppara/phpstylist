@@ -72,6 +72,31 @@ EOF;
         $this->checkStyle($str, $expected);
     }
 
+    /**
+     * @test
+     * @group exception
+     */
+    public function handleException()
+    {
+        $str = <<<'EOF'
+<?php
+try {
+    echo 'foo';
+} catch (Exception $e) {echo $e->getMessage(); }
+EOF;
+
+        $expected = <<<'EOF'
+<?php
+try {
+    echo 'foo';
+}
+catch(Exception $e) {
+    echo $e->getMessage();
+}
+EOF;
+
+        $this->checkStyle($str, $expected);
+    }
 
 }
 
