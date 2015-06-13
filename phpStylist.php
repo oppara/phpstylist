@@ -162,6 +162,7 @@ class phpStylist
     $in_for        = false;
     $in_break      = false;
     $in_function   = false;
+    $in_arguments  = false;
     $in_concat     = false;
     $space_after   = false;
     $curly_open    = false;
@@ -324,6 +325,9 @@ class phpStylist
           break;
 
         case S_OPEN_PARENTH:
+          if ($in_function) {
+              $in_arguments = true;
+          }
           if ($if_level > 0) {
             $if_parenth["i" . $if_level]++;
           }
@@ -340,6 +344,9 @@ class phpStylist
           break;
 
         case S_CLOSE_PARENTH:
+          if ($in_function) {
+              $in_arguments = false;
+          }
           if ($array_level > 0) {
             $arr_parenth["i" . $array_level]--;
             if ($arr_parenth["i" . $array_level] == 0) {
@@ -644,7 +651,6 @@ class phpStylist
               $arr_parenth["i" . $array_level] = 0;
             }
           }
-        case T_STRING:
         case T_CONSTANT_ENCAPSED_STRING:
         case T_ENCAPSED_AND_WHITESPACE:
         case T_VARIABLE:
@@ -655,6 +661,14 @@ class phpStylist
         case T_OPEN_TAG:
         case T_OPEN_TAG_WITH_ECHO:
           $this->_append_code($text, false);
+          break;
+
+        case T_STRING:
+            if ($in_arguments) {
+                $this->_append_code($text . ' ', false);
+            } else {
+                $this->_append_code($text, false);
+            }
           break;
 
         case T_CLOSE_TAG:

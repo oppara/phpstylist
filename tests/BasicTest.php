@@ -6,6 +6,30 @@ class BasicTest extends PhpStylistTestCase
 
     /**
      * @test
+     * @group type_hinting
+     */
+    public function handleTypeHinging()
+    {
+        $str = <<<'EOF'
+<?php
+    public function test(OtherClass $otherclass, $foo = 'bar', $baz = null) {
+        echo $otherclass->foo($baz);
+    }
+EOF;
+
+        $expected = <<<'EOF'
+<?php
+public function test(OtherClass $otherclass, $foo = 'bar', $baz = null)
+{
+    echo $otherclass->foo($baz);
+}
+EOF;
+
+        $this->checkStyle($str, $expected);
+    }
+
+    /**
+     * @test
      * @group if
      */
     public function handleIf01()
