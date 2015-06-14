@@ -107,6 +107,7 @@ elseif (defined('T_DOC_COMMENT')) {
 
 class phpStylist
 {
+  var $debug = false;
   var $indent_size = 2;
   var $indent_char = " ";
   var $block_size  = 3;
@@ -180,6 +181,10 @@ class phpStylist
     $this->_tokens = token_get_all($source);
     foreach ($this->_tokens as $index => $token) {
       list($id, $text) = $this->_get_token($token);
+      if ($this->debug) {
+          $_name = is_numeric($id) ? token_name($id) : $id;
+          var_dump("$_name : $id, $text");
+      }
       $this->_pointer = $index;
       if ($halt_parser && $id != S_QUOTE) {
         $this->_append_code($text, false);
