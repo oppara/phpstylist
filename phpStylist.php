@@ -509,6 +509,14 @@ class phpStylist
           if ($this->_is_token(S_OPEN_PARENTH)) {
             $space_after = $condition;
           }
+          if ($this->_is_token(S_COMMA, true)) {
+              $this->_append_code($this->_get_space($condition) . $text);
+              break;
+          }
+          if ($this->_is_token(S_OPEN_PARENTH, true)) {
+              $this->_append_code($text);
+              break;
+          }
           $this->_append_code($this->_get_space($condition) . $text . $this->_get_space($condition));
           break;
 
