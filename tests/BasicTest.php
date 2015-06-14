@@ -3,6 +3,46 @@ require_once __DIR__ . '/PhpStylistTestCase.php';
 
 class BasicTest extends PhpStylistTestCase
 {
+    /**
+     * @test
+     * @group number
+     */
+    public function handleNumber()
+    {
+        $str = <<<'EOF'
+<?php
+$a=foo(+1, -1);
+$b=substr('abcdef',-3);
+EOF;
+
+        $expected = <<<'EOF'
+<?php
+$a = foo(+1, -1);
+$b = substr('abcdef', -3);
+EOF;
+
+        $this->checkStyle($str, $expected);
+    }
+
+    /**
+     * @test
+     * @group operator
+     */
+    public function handleOperator()
+    {
+        $str = <<<'EOF'
+<?php
+$a=1+2;
+EOF;
+
+        $expected = <<<'EOF'
+<?php
+$a = 1 + 2;
+EOF;
+
+        $this->checkStyle($str, $expected);
+    }
+
 
     /**
      * @test
