@@ -34,6 +34,7 @@ abstract class PhpStylistTestCase extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        $this->debug = false;
         $this->ps = new phpStylist();
         $this->ps->indent_size = self::INDENT_SIZE;
         foreach ($this->default_options as $opt) {
@@ -41,10 +42,10 @@ abstract class PhpStylistTestCase extends PHPUnit_Framework_TestCase
         }
     }
 
-    protected function checkStyle($src, $expected, $show = false)
+    protected function checkStyle($src, $expected)
     {
         $actual = $this->ps->formatCode($src);
-        if ($show) {
+        if ($this->debug) {
             echo "\n";
             echo $actual;
             echo "\n";
